@@ -1,15 +1,15 @@
 0 dirt
 1 stone
 2 grass 
-3 grass stuff (mushroom, actual grass, etc) *
-4 torch
+3 plants *
+4 torch *
 5 tree trunk *
 6 iron ore
 7 copper ore
 8 gold ore
 9 silver ore
 10 door *
-11 door *
+11 open door *
 12 life crystal *
 13 bottle *
 14 table *
@@ -22,7 +22,7 @@
 21 chest *
 22 demonite ore
 23 corrupted grass
-24 corrupted grass stuff *
+24 corrupted plants *
 25 ebonstone
 26 demon altar *
 27 sunflower *
@@ -59,7 +59,7 @@
 58 hellstone
 59 mud
 60 jungle grass
-61 jungle grass stuff *
+61 jungle plants *
 62 jungle vine
 63 sapphire
 64 ruby
@@ -80,16 +80,16 @@
 79 bed *
 80 cactus
 81 coral *
-82 planted seeds *
-83 ??? (maybe grown seeds that haven't bloomed yet) *
-84 bloomed seeds *
+82 herbs *
+83 mature herbs *
+84 blooming herbs *
 85 tombstone *
 86 loom *
 87 piano *
-88 drawers *
+88 dresser *
 89 bench *
 90 bathtub *
-91 banners *
+91 banner *
 92 lamp post *
 93 tiki torch *
 94 keg *

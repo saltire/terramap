@@ -1,4 +1,5 @@
 import struct
+import sys
 
 from PIL import Image
 
@@ -53,42 +54,48 @@ class World:
                               ]:
                 level[key] = self.read_data(type)
                 print key, level[key]
-            #print self.file.tell()
+            print self.file.tell()
         
+            print 'reading tiles...'
             tiles = {}
-            for x in range(1):
-                if (x + 1) % (level['width'] / 10) == 0:
-                    print 'read {0}% of tiles'.format(int((x + 1) / float(level['width']) * 100))
+            more = 0
+            for x in range(level['width']):
+                self.display_progress(x + 1, level['width'])
                 
                 for y in range(level['height']):
                     
-                    try:
-                        tiles[(x, y)] = {}
+                    if more:
+                        tiles[(x, y)] = tile
+                        more -= 1
+                        #print (x, y), more
+                        
+                    else:
+                        tile = {}
                         if self.read_data('bool'):
-                            tiles[(x, y)]['type'] = self.read_data('byte')
-                            if tiles[(x, y)]['type'] in self.xtiles:
+                            tile['type'] = self.read_data('byte')
+                            if tile['type'] in self.xtiles:
                                 texu = self.read_data('word')
                                 texv = self.read_data('word')
-                                tiles[(x, y)]['tex'] = (texu, texv)
-                        tiles[(x, y)]['lighted'] = self.read_data('bool')
+                                tile['tex'] = (texu, texv)
                         if self.read_data('bool'):
-                            tiles[(x, y)]['walltype'] = self.read_data('byte')
+                            tile['walltype'] = self.read_data('byte')
                         if self.read_data('bool'):
-                            tiles[(x, y)]['liquidlevel'] = self.read_data('byte')
-                            tiles[(x, y)]['lava'] = self.read_data('bool')
-                    
-                    except struct.error:
-                        print 'error', (x, y), self.file.tell()
-                        
-                    print (x, y), tiles[(x, y)]
-                        
+                            tile['liquidlevel'] = self.read_data('byte')
+                            tile['lava'] = self.read_data('bool')
+                        if self.read_data('bool'):
+                            tile['wire'] = True
+                            
+                        tiles[(x, y)] = tile
+                        more = self.read_data('word')
+                                                
             print 'generating image...'
             image = Image.new('RGB', (level['width'], level['height']))
             imagedata = []
-            for y in range(level['width']):
-                for x in range(level['height']):
-                    colour = (255, 255, 255) if tiles[(x, y)]['type'] == 0 else (0, 0, 0) 
-                    imagedata.append(color)
+            for y in range(level['height']):
+                self.display_progress(y + 1, level['height'])
+                for x in range(level['width']):
+                    colour = (0, 0, 0) if 'type' in tiles[(x, y)] else (255, 255, 255)
+                    imagedata.append(colour)
             image.putdata(imagedata)
             print 'saving image...'
             image.save('D:\\code\\python\\terramap\\img\\map.png')
@@ -127,6 +134,11 @@ class World:
                 npcs.append((name, (x, y), homeless, (homex, homey)))
             print npcs
             
+            
+    def display_progress(self, divisor, dividend, interval=10):
+        if divisor % (dividend / interval) == 0:
+            print '{0}% done.'.format(int(divisor / float(dividend) * 100))
+            
     
     def read_data(self, type):
         if type == 'dword':
@@ -157,4 +169,4 @@ class World:
 
 
 if __name__ == '__main__':
-    World('C:\\Users\\Marcus\\My Documents\\My Games\\Terraria\\Worlds\\world1.wld')
+    World('\\\\ZOYD\\Users\\Marcus\\My Documents\\My Games\\Terraria\\Worlds\\world1.wld')
