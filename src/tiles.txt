@@ -1,0 +1,107 @@
+0 dirt
+1 stone
+2 grass 
+3 grass stuff (mushroom, actual grass, etc) *
+4 torch
+5 tree trunk *
+6 iron ore
+7 copper ore
+8 gold ore
+9 silver ore
+10 door *
+11 door *
+12 life crystal *
+13 bottle *
+14 table *
+15 chair *
+16 iron anvil *
+17 furnace *
+18 workbench *
+19 wooden platform
+20 tree sprout *
+21 chest *
+22 demonite ore
+23 corrupted grass
+24 corrupted grass stuff *
+25 ebonstone
+26 demon altar *
+27 sunflower *
+28 pot *
+29 piggy bank *
+30 wood
+31 shadow orb *
+32 corruption thorn
+33 candle *
+34 copper chandelier *
+35 silver chandelier *
+36 gold chandelier *
+37 meteorite
+38 gray brick
+39 clay brick
+40 clay
+41 blue brick
+42 chain lantern *
+43 green brick
+44 pink brick
+45 gold brick
+46 silver brick
+47 copper brick
+48 spike
+49 water candle
+50 book *
+51 cobweb
+52 vine
+53 sand
+54 glass
+55 sign *
+56 obsidian
+57 ash
+58 hellstone
+59 mud
+60 jungle grass
+61 jungle grass stuff *
+62 jungle vine
+63 sapphire
+64 ruby
+65 emerald
+66 topaz
+67 amethyst
+68 diamond
+69 jungle thorn
+70 mushroom grass
+71 glowing mushroom *
+72 mushroom trunk *
+73 tall grass *
+74 tall jungle grass *
+75 obsidian brick
+76 hellstone brick
+77 hellforge *
+78 clay pot *
+79 bed *
+80 cactus
+81 coral *
+82 planted seeds *
+83 ??? (maybe grown seeds that haven't bloomed yet) *
+84 bloomed seeds *
+85 tombstone *
+86 loom *
+87 piano *
+88 drawers *
+89 bench *
+90 bathtub *
+91 banners *
+92 lamp post *
+93 tiki torch *
+94 keg *
+95 chinese lantern *
+96 cooking pot *
+97 safe *
+98 skull lantern *
+99 trash can *
+100 candelabra *
+101 bookshelf *
+102 throne *
+103 bowl *
+104 grandfather clock *
+105 statue *
+106 sawmill *
