@@ -1,5 +1,4 @@
 import struct
-import sys
 
 from PIL import Image
 
@@ -7,13 +6,11 @@ class World:
     def __init__(self, path):
         
         self.xtiles = []
-        with open('tiles.txt', 'r') as tiles:
+        with open('tiles.csv', 'rb') as tiles:
             for line in tiles.readlines():
-                id, line = line.split(' ', 1)
-                if line.strip()[-1:] == '*':
-                    line = line.rsplit(' ', 1)[0]
+                id, type, special = line.strip().split(',')
+                if special == '1':
                     self.xtiles.append(int(id))
-            print self.xtiles
                     
         with open(path, 'rb') as self.file:
             level = {}
@@ -54,7 +51,6 @@ class World:
                               ]:
                 level[key] = self.read_data(type)
                 print key, level[key]
-            print self.file.tell()
         
             print 'reading tiles...'
             tiles = {}
@@ -67,7 +63,6 @@ class World:
                     if more:
                         tiles[(x, y)] = tile
                         more -= 1
-                        #print (x, y), more
                         
                     else:
                         tile = {}

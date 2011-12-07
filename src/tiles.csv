@@ -1,0 +1,107 @@
+0,dirt,0
+1,stone,0
+2,grass ,0
+3,plants,1
+4,torch,1
+5,tree trunk,1
+6,iron ore,0
+7,copper ore,0
+8,gold ore,0
+9,silver ore,0
+10,door,1
+11,open door,1
+12,life crystal,1
+13,bottle,1
+14,table,1
+15,chair,1
+16,iron anvil,1
+17,furnace,1
+18,workbench,1
+19,wooden platform,0
+20,tree sprout,1
+21,chest,1
+22,demonite ore,0
+23,corrupted grass,0
+24,corrupted plants,1
+25,ebonstone,0
+26,demon altar,1
+27,sunflower,1
+28,pot,1
+29,piggy bank,1
+30,wood,0
+31,shadow orb,1
+32,corruption thorn,0
+33,candle,1
+34,copper chandelier,1
+35,silver chandelier,1
+36,gold chandelier,1
+37,meteorite,0
+38,gray brick,0
+39,clay brick,0
+40,clay,0
+41,blue brick,0
+42,chain lantern,1
+43,green brick,0
+44,pink brick,0
+45,gold brick,0
+46,silver brick,0
+47,copper brick,0
+48,spike,0
+49,water candle,0
+50,book,1
+51,cobweb,0
+52,vine,0
+53,sand,0
+54,glass,0
+55,sign,1
+56,obsidian,0
+57,ash,0
+58,hellstone,0
+59,mud,0
+60,jungle grass,0
+61,jungle plants,1
+62,jungle vine,0
+63,sapphire,0
+64,ruby,0
+65,emerald,0
+66,topaz,0
+67,amethyst,0
+68,diamond,0
+69,jungle thorn,0
+70,mushroom grass,0
+71,glowing mushroom,1
+72,mushroom trunk,1
+73,tall grass,1
+74,tall jungle grass,1
+75,obsidian brick,0
+76,hellstone brick,0
+77,hellforge,1
+78,clay pot,1
+79,bed,1
+80,cactus,0
+81,coral,1
+82,herbs,1
+83,mature herbs,1
+84,blooming herbs,1
+85,tombstone,1
+86,loom,1
+87,piano,1
+88,dresser,1
+89,bench,1
+90,bathtub,1
+91,banner,1
+92,lamp post,1
+93,tiki torch,1
+94,keg,1
+95,chinese lantern,1
+96,cooking pot,1
+97,safe,1
+98,skull lantern,1
+99,trash can,1
+100,candelabra,1
+101,bookshelf,1
+102,throne,1
+103,bowl,1
+104,grandfather clock,1
+105,statue,1
+106,sawmill,1
