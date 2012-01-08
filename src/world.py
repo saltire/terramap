@@ -1,4 +1,5 @@
 import struct
+import sys
 
 from PIL import Image
 
@@ -15,6 +16,10 @@ class World:
                     
         with open(path, 'rb') as self.file:
             header = self.read_header()
+            if header['version'] != 37:
+                print 'Incompatible map version:', header['version']
+                sys.exit(0)
+
             tiles = self.read_tiles(header['width'], header['height'])
             chests = self.read_chests()
             signs = self.read_signs()
@@ -51,6 +56,7 @@ class World:
                           ('mechanicsaved', 'bool'),
                           ('goblinsdefeated', 'bool'),
                           ('clowndefeated', 'bool'),
+                          ('frostdefeated', 'bool'),
                           ('orbdestroyed', 'bool'),
                           ('meteor', 'bool'),
                           ('orbsdestroyed', 'byte'),
@@ -68,32 +74,33 @@ class World:
     def read_tiles(self, width, height):
         print 'reading tiles...'
         tiles = {}
-        more = 0
+        runlength = 0
         for x in range(width):
             self.display_progress(x + 1, width)
             for y in range(height):
-                if more:
+                if runlength > 0:
+                    # copy the previous tile this many times
                     tiles[(x, y)] = tile
-                    more -= 1
+                    runlength -= 1
                     
                 else:
                     tile = {}
-                    if self.read_data('bool'):
+                    if self.read_data('bool'): # tile present?
                         tile['type'] = self.read_data('byte')
-                        if tile['type'] in self.xtiles:
+                        if tile['type'] in self.xtiles: # tile has multiple states?
                             texu = self.read_data('word')
                             texv = self.read_data('word')
-                            tile['tex'] = (texu, texv)
-                    if self.read_data('bool'):
+                            tile['texture'] = (texu, texv)
+                    if self.read_data('bool'): # has wall?
                         tile['walltype'] = self.read_data('byte')
-                    if self.read_data('bool'):
+                    if self.read_data('bool'): # has liquid?
                         tile['liquidlevel'] = self.read_data('byte')
                         tile['lava'] = self.read_data('bool')
-                    if self.read_data('bool'):
+                    if self.read_data('bool'): # has wire?
                         tile['wire'] = True
                         
                     tiles[(x, y)] = tile
-                    more = self.read_data('word')
+                    runlength = self.read_data('word')
                     
         return tiles
 
@@ -156,7 +163,7 @@ class World:
                 imagedata.append(colour)
         image.putdata(imagedata)
         print 'saving image...'
-        image.save('D:\\code\\python\\terramap\\img\\map.png')
+        image.save('map.png')
         print 'done.'
             
             
@@ -194,4 +201,5 @@ class World:
 
 
 if __name__ == '__main__':
-    World('\\\\ZOYD\\Users\\Marcus\\My Documents\\My Games\\Terraria\\Worlds\\world1.wld')
+    path = sys.argv[1]
+    World(path)
