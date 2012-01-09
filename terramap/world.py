@@ -4,10 +4,10 @@ import sys
 from PIL import Image
 
 class World:
-    def __init__(self, worldpath):
+    def __init__(self, worldpath, tilelist):
         # load tile properties
         self.xtiles = []
-        with open('tiles.csv', 'rb') as tiles:
+        with open(tilelist, 'rb') as tiles:
             for line in tiles.readlines():
                 id, type, special = line.strip().split(',')
                 if special == '1':
@@ -196,10 +196,3 @@ class World:
         
         elif type == 'float':
             return struct.unpack('<f', self.file.read(4))[0]
-        
-
-
-if __name__ == '__main__':
-    worldpath = sys.argv[1]
-    imgpath = sys.argv[2]
-    World(worldpath).draw_map(imgpath)
