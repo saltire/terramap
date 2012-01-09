@@ -76,7 +76,7 @@
 75,obsidian brick,0
 76,hellstone brick,0
 77,hellforge,1
-78,clay pot,0
+78,clay pot,1
 79,bed,1
 80,cactus,0
 81,coral,1
@@ -127,7 +127,7 @@
 126,disco ball,1
 127,ice rod,1
 128,mannequin,1
-129,crystal shard,0
+129,crystal shard,1
 130,active stone block,0
 131,inactive stone block,0
 132,lever,1
@@ -137,14 +137,14 @@
 136,switch,1
 137,dart trap,1
 138,boulder,1
-139,music box,0
+139,music box,1
 140,demonite brick,0
 141,explosives,1
 142,inlet pump,1
 143,outlet pump,1
 144,one second timer,1
-145,candy cane block,1
-146,green candy cane block,1
+145,candy cane block,0
+146,green candy cane block,0
 147,snow block,0
 148,snow brick,0
 149,blue light,1
