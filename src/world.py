@@ -4,8 +4,7 @@ import sys
 from PIL import Image
 
 class World:
-    def __init__(self, path):
-        
+    def __init__(self, worldpath):
         # load tile properties
         self.xtiles = []
         with open('tiles.csv', 'rb') as tiles:
@@ -14,22 +13,37 @@ class World:
                 if special == '1':
                     self.xtiles.append(int(id))
                     
-        with open(path, 'rb') as self.file:
-            header = self.read_header()
-            if header['version'] != 37:
-                print 'Incompatible map version:', header['version']
+        version = 37 # compatible map version
+                    
+        with open(worldpath, 'rb') as self.file:
+            self.header = self._read_header()
+            if self.header['version'] != version:
+                print 'Incompatible map version:', self.header['version']
                 sys.exit(0)
 
-            tiles = self.read_tiles(header['width'], header['height'])
-            chests = self.read_chests()
-            signs = self.read_signs()
-            npcs = self.read_npcs()
-            npcnames = self.read_npcnames()
-        
-        self.generate_image(tiles)
+            self.tiles = self._read_tiles(self.header['width'], self.header['height'])
+            self.chests = self._read_chests()
+            self.signs = self._read_signs()
+            self.npcs = self._read_npcs()
+            self.npcnames = self._read_npcnames()
 
             
-    def read_header(self):
+    def draw_map(self, imgpath):
+        print 'generating image...'
+        image = Image.new('RGB', (self.header['width'], self.header['height']))
+        imagedata = []
+        for y in range(self.header['height']):
+            self._display_progress(y + 1, self.header['height'])
+            for x in range(self.header['width']):
+                colour = (0, 0, 0) if 'type' in self.tiles[(x, y)] else (255, 255, 255)
+                imagedata.append(colour)
+        image.putdata(imagedata)
+        print 'saving image...'
+        image.save(imgpath)
+        print 'done.'
+            
+            
+    def _read_header(self):
         header = {}
         for key, type in [
                           ('version', 'dword'),
@@ -67,16 +81,16 @@ class World:
                           ('goblintype', 'dword'),
                           ('goblinx', 'double')
                           ]:
-            header[key] = self.read_data(type)
+            header[key] = self._read_data(type)
         return header
 
         
-    def read_tiles(self, width, height):
+    def _read_tiles(self, width, height):
         print 'reading tiles...'
         tiles = {}
         runlength = 0
         for x in range(width):
-            self.display_progress(x + 1, width)
+            self._display_progress(x + 1, width)
             for y in range(height):
                 if runlength > 0:
                     # copy the previous tile this many times
@@ -85,99 +99,84 @@ class World:
                     
                 else:
                     tile = {}
-                    if self.read_data('bool'): # tile present?
-                        tile['type'] = self.read_data('byte')
+                    if self._read_data('bool'): # tile present?
+                        tile['type'] = self._read_data('byte')
                         if tile['type'] in self.xtiles: # tile has multiple states?
-                            texu = self.read_data('word')
-                            texv = self.read_data('word')
+                            texu = self._read_data('word')
+                            texv = self._read_data('word')
                             tile['texture'] = (texu, texv)
-                    if self.read_data('bool'): # has wall?
-                        tile['walltype'] = self.read_data('byte')
-                    if self.read_data('bool'): # has liquid?
-                        tile['liquidlevel'] = self.read_data('byte')
-                        tile['lava'] = self.read_data('bool')
-                    if self.read_data('bool'): # has wire?
+                    if self._read_data('bool'): # has wall?
+                        tile['walltype'] = self._read_data('byte')
+                    if self._read_data('bool'): # has liquid?
+                        tile['liquidlevel'] = self._read_data('byte')
+                        tile['lava'] = self._read_data('bool')
+                    if self._read_data('bool'): # has wire?
                         tile['wire'] = True
                         
                     tiles[(x, y)] = tile
-                    runlength = self.read_data('word')
+                    runlength = self._read_data('word')
                     
         return tiles
 
                             
-    def read_chests(self):            
+    def _read_chests(self):            
         chests = []
         for chest in range(1000):
-            if self.read_data('bool'):
-                x = self.read_data('dword')
-                y = self.read_data('dword')
+            if self._read_data('bool'):
+                x = self._read_data('dword')
+                y = self._read_data('dword')
                 items = []
                 for i in range(20):
-                    count = self.read_data('byte')
-                    name = self.read_data('pstring') if count > 0 else ''
-                    prefix = self.read_data('byte') if count > 0 else 0
+                    count = self._read_data('byte')
+                    name = self._read_data('pstring') if count > 0 else ''
+                    prefix = self._read_data('byte') if count > 0 else 0
                     items.append((count, name, prefix))
                 chests.append(((x, y), items))
         return chests
 
             
-    def read_signs(self):
+    def _read_signs(self):
         signs = []
         for sign in range(1000):
-            if self.read_data('bool'):
-                text = self.read_data('pstring')
-                x = self.read_data('dword')
-                y = self.read_data('dword')
+            if self._read_data('bool'):
+                text = self._read_data('pstring')
+                x = self._read_data('dword')
+                y = self._read_data('dword')
                 signs.append(((x, y), text))
         return signs
 
 
-    def read_npcs(self):        
+    def _read_npcs(self):        
         npcs = []
-        while self.read_data('bool'):
-            name = self.read_data('pstring')
-            x = self.read_data('float')
-            y = self.read_data('float')
-            homeless = self.read_data('bool')
-            homex = self.read_data('dword')
-            homey = self.read_data('dword')
+        while self._read_data('bool'):
+            name = self._read_data('pstring')
+            x = self._read_data('float')
+            y = self._read_data('float')
+            homeless = self._read_data('bool')
+            homex = self._read_data('dword')
+            homey = self._read_data('dword')
             npcs.append((name, (x, y), homeless, (homex, homey)))
         return npcs
 
 
-    def read_npcnames(self):        
+    def _read_npcnames(self):        
         npcnames = {}
         for npc in ['merchant', 'nurse', 'armsdealer', 'dryad', 'guide', 'clothier', 'demolitionist', 'tinkerer', 'wizard', 'mechanic']:
-            npcnames[npc] = self.read_data('pstring')
+            npcnames[npc] = self._read_data('pstring')
         return npcnames
     
     
-    def generate_image(self, tiles):
-        print 'generating image...'
-        image = Image.new('RGB', (level['width'], level['height']))
-        imagedata = []
-        for y in range(level['height']):
-            self.display_progress(y + 1, level['height'])
-            for x in range(level['width']):
-                colour = (0, 0, 0) if 'type' in tiles[(x, y)] else (255, 255, 255)
-                imagedata.append(colour)
-        image.putdata(imagedata)
-        print 'saving image...'
-        image.save('map.png')
-        print 'done.'
-            
-            
-    def display_progress(self, divisor, dividend, interval=10):
+    def _display_progress(self, divisor, dividend, interval=10):
         if divisor % (dividend / interval) == 0:
             print '{0}% done.'.format(int(divisor / float(dividend) * 100))
             
     
-    def read_data(self, type):
+    def _read_data(self, type):
         if type == 'dword':
             return struct.unpack('<I', self.file.read(4))[0]
         
         elif type == 'pstring':
-            length = self.read_data('byte')
+            length = self._read_data('byte')
             return struct.unpack('{0}s'.format(length), self.file.read(length))[0]
         
         elif type == 'rect':
@@ -201,5 +200,6 @@ class World:
 
 
 if __name__ == '__main__':
-    path = sys.argv[1]
-    World(path)
+    worldpath = sys.argv[1]
+    imgpath = sys.argv[2]
+    World(worldpath).draw_map(imgpath)
