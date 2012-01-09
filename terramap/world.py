@@ -12,8 +12,9 @@ class World:
                 id, type, special = line.strip().split(',')
                 if special == '1':
                     self.xtiles.append(int(id))
-                    
-        version = 37 # compatible map version
+
+        # compatible map version
+        version = 37 # 1.1.1
                     
         with open(worldpath, 'rb') as self.file:
             self.header = self._read_header()
@@ -31,13 +32,14 @@ class World:
     def draw_map(self, imgpath):
         print 'generating image...'
         image = Image.new('RGB', (self.header['width'], self.header['height']))
+        img = image.load()
         imagedata = []
         for y in range(self.header['height']):
             self._display_progress(y + 1, self.header['height'])
             for x in range(self.header['width']):
                 colour = (0, 0, 0) if 'type' in self.tiles[(x, y)] else (255, 255, 255)
-                imagedata.append(colour)
-        image.putdata(imagedata)
+                img[x, y] = colour
+                
         print 'saving image...'
         image.save(imgpath)
         print 'done.'
@@ -86,7 +88,7 @@ class World:
 
         
     def _read_tiles(self, width, height):
-        print 'reading tiles...'
+        print 'reading {0}x{1} tiles...'.format(width, height)
         tiles = {}
         runlength = 0
         for x in range(width):
@@ -94,7 +96,7 @@ class World:
             for y in range(height):
                 if runlength > 0:
                     # copy the previous tile this many times
-                    tiles[(x, y)] = tile
+                    tiles[x, y] = tile
                     runlength -= 1
                     
                 else:
@@ -112,21 +114,22 @@ class World:
                         tile['lava'] = self._read_data('bool')
                     if self._read_data('bool'): # has wire?
                         tile['wire'] = True
-                        
-                    tiles[(x, y)] = tile
+
+                    tiles[x, y] = tile
                     runlength = self._read_data('word')
                     
         return tiles
 
                             
-    def _read_chests(self):            
+    def _read_chests(self):
+        print 'reading chests...'          
         chests = []
-        for chest in range(1000):
+        for i in range(1000):
             if self._read_data('bool'):
                 x = self._read_data('dword')
                 y = self._read_data('dword')
                 items = []
-                for i in range(20):
+                for j in range(20):
                     count = self._read_data('byte')
                     name = self._read_data('pstring') if count > 0 else ''
                     prefix = self._read_data('byte') if count > 0 else 0
@@ -136,8 +139,9 @@ class World:
 
             
     def _read_signs(self):
+        print 'reading signs...'
         signs = []
-        for sign in range(1000):
+        for i in range(1000):
             if self._read_data('bool'):
                 text = self._read_data('pstring')
                 x = self._read_data('dword')
@@ -146,7 +150,8 @@ class World:
         return signs
 
 
-    def _read_npcs(self):        
+    def _read_npcs(self):
+        print 'reading npcs...'
         npcs = []
         while self._read_data('bool'):
             name = self._read_data('pstring')
@@ -159,7 +164,8 @@ class World:
         return npcs
 
 
-    def _read_npcnames(self):        
+    def _read_npcnames(self):    
+        print 'reading npc names...'    
         npcnames = {}
         for npc in ['merchant', 'nurse', 'armsdealer', 'dryad', 'guide', 'clothier', 'demolitionist', 'tinkerer', 'wizard', 'mechanic']:
             npcnames[npc] = self._read_data('pstring')
