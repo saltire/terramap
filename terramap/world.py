@@ -183,6 +183,8 @@ class World:
         
         elif type == 'pstring':
             length = self._read_data('byte')
+            if length >= 128:
+                length += (self._read_data('byte') - 1) * 128
             return struct.unpack('{0}s'.format(length), self.file.read(length))[0]
         
         elif type == 'rect':
