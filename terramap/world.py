@@ -6,12 +6,18 @@ from PIL import Image
 class World:
     def __init__(self, worldpath, tilelist):
         # load tile properties
-        self.xtiles = []
+        self.tiletypes = []
         with open(tilelist, 'rb') as tiles:
             for line in tiles.readlines():
-                id, type, special = line.strip().split(',')
-                if special == '1':
-                    self.xtiles.append(int(id))
+                id, name, frames, r, g, b, a = [l.strip() for l in line.split(', ')]
+                self.tiletypes.append({
+                    'name': name,
+                    'frames': frames == '1',
+                    'r': int(r),
+                    'g': int(g),
+                    'b': int(b),
+                    'a': int(a)
+                    })
 
         # compatible map version
         version = 37 # 1.1.1
@@ -37,7 +43,12 @@ class World:
         for y in range(self.header['height']):
             self._display_progress(y + 1, self.header['height'])
             for x in range(self.header['width']):
-                colour = (0, 0, 0) if 'type' in self.tiles[x * height + y] else (255, 255, 255)
+                tile = self.tiles[x * self.header['height'] + y]
+                if 'type' in tile:
+                    type = self.tiletypes[tile['type']]
+                    colour = type['r'], type['g'], type['b']
+                else:
+                    colour = (0, 0, 0)
                 img[x, y] = colour
                 
         print 'saving image...'
@@ -103,7 +114,7 @@ class World:
                     tile = {}
                     if self._read_data('bool'): # tile present?
                         tile['type'] = self._read_data('byte')
-                        if tile['type'] in self.xtiles: # tile has multiple states?
+                        if self.tiletypes[tile['type']]['frames']: # tile has multiple frames?
                             texu = self._read_data('word')
                             texv = self._read_data('word')
                             tile['texture'] = (texu, texv)

@@ -1,150 +1,150 @@
-0,dirt,0
-1,stone,0
-2,grass,0
-3,plants,1
-4,torch,1
-5,tree trunk,1
-6,iron ore,0
-7,copper ore,0
-8,gold ore,0
-9,silver ore,0
-10,door,1
-11,open door,1
-12,life crystal,1
-13,bottle,1
-14,table,1
-15,chair,1
-16,iron anvil,1
-17,furnace,1
-18,workbench,1
-19,wooden platform,0
-20,tree sprout,1
-21,chest,1
-22,demonite ore,0
-23,corrupted grass,0
-24,corrupted plants,1
-25,ebonstone,0
-26,demon altar,1
-27,sunflower,1
-28,pot,1
-29,piggy bank,1
-30,wood,0
-31,shadow orb,1
-32,corruption thorn,0
-33,candle,1
-34,copper chandelier,1
-35,silver chandelier,1
-36,gold chandelier,1
-37,meteorite,0
-38,gray brick,0
-39,clay brick,0
-40,clay,0
-41,blue brick,0
-42,chain lantern,1
-43,green brick,0
-44,pink brick,0
-45,gold brick,0
-46,silver brick,0
-47,copper brick,0
-48,spike,0
-49,water candle,0
-50,book,1
-51,cobweb,0
-52,vine,0
-53,sand,0
-54,glass,0
-55,sign,1
-56,obsidian,0
-57,ash,0
-58,hellstone,0
-59,mud,0
-60,jungle grass,0
-61,jungle plants,1
-62,jungle vine,0
-63,sapphire,0
-64,ruby,0
-65,emerald,0
-66,topaz,0
-67,amethyst,0
-68,diamond,0
-69,jungle thorn,0
-70,mushroom grass,0
-71,glowing mushroom,1
-72,mushroom trunk,1
-73,tall grass,1
-74,tall jungle grass,1
-75,obsidian brick,0
-76,hellstone brick,0
-77,hellforge,1
-78,clay pot,1
-79,bed,1
-80,cactus,0
-81,coral,1
-82,herbs,1
-83,mature herbs,1
-84,blooming herbs,1
-85,tombstone,1
-86,loom,1
-87,piano,1
-88,dresser,1
-89,bench,1
-90,bathtub,1
-91,banner,1
-92,lamp post,1
-93,tiki torch,1
-94,keg,1
-95,chinese lantern,1
-96,cooking pot,1
-97,safe,1
-98,skull lantern,1
-99,trash can,1
-100,candelabra,1
-101,bookshelf,1
-102,throne,1
-103,bowl,1
-104,grandfather clock,1
-105,statue,1
-106,sawmill,1
-107,cobalt ore,0
-108,mythril ore,0
-109,hallowed grass,0
-110,hallowed plants,1
-111,adamantite ore,0
-112,ebonsand block,0
-113,hallowed plants,1
-114,tinkerer's workshop,1
-115,hallowed vines,0
-116,pearlsand block,0
-117,pearlstone block,0
-118,pearlstone brick,0
-119,iridescent brick,0
-120,mudstone block,0
-121,cobalt brick,0
-122,mythril brick,0
-123,silt block,0
-124,wooden beam,0
-125,crystal ball,1
-126,disco ball,1
-127,ice rod,0
-128,mannequin,1
-129,crystal shard,1
-130,active stone block,0
-131,inactive stone block,0
-132,lever,1
-133,adamantite forge,1
-134,mythril anvil,1
-135,red pressure plate,1
-136,switch,1
-137,dart trap,1
-138,boulder,1
-139,music box,1
-140,demonite brick,0
-141,explosives,1
-142,inlet pump,1
-143,outlet pump,1
-144,one second timer,1
-145,candy cane block,0
-146,green candy cane block,0
-147,snow block,0
-148,snow brick,0
-149,blue light,1
+  0, dirt block             , 0, 145, 106,  79, 255
+  1, stone block            , 0, 128, 128, 128, 255
+  2, grass                  , 0,  28, 216,  94, 255
+  3, grass flowers          , 1,  13, 101,  36, 255
+  4, torch                  , 1, 253,  62,   3, 255
+  5, tree                   , 1,  99,  70,  49, 255
+  6, iron ore               , 0, 107,  89,  78, 255
+  7, copper ore             , 0, 198,  86,  29, 255
+  8, gold ore               , 0, 185, 164,  23, 255
+  9, silver ore             , 0, 217, 223, 223, 255
+ 10, wooden door            , 1,   0, 255, 242, 255
+ 11, door open              , 1,   0, 255, 242, 255
+ 12, crystal heart          , 1, 255,   0,   0, 255
+ 13, bottle                 , 1,   0, 255, 242, 255
+ 14, wooden table           , 1,   0, 255, 242, 255
+ 15, chair                  , 1,   0, 255, 242, 255
+ 16, iron anvil             , 1,   0, 255, 242, 255
+ 17, furnace                , 1,   0, 255, 242, 255
+ 18, work bench             , 1,   0, 255, 242, 255
+ 19, wood platform          , 0, 107,  58,  24, 255
+ 20, sapling                , 1,  13, 101,  36, 255
+ 21, chest                  , 1, 221, 184,   0, 255
+ 22, demonite ore           , 0,  98,  95, 167, 255
+ 23, corruption             , 0, 141, 137, 223, 255
+ 24, corruption plants      , 1, 141, 137, 223, 255
+ 25, ebonstone block        , 0,  75,  74, 130, 255
+ 26, demon altar            , 1, 144,   0, 255, 255
+ 27, sunflower              , 1, 196, 255,  20, 255
+ 28, pot                    , 1, 140,  39,  38, 255
+ 29, piggy bank             , 1,   0, 255, 242, 255
+ 30, wood                   , 0, 104,  73,  52, 255
+ 31, shadow orb             , 1,   0,   0,   0, 255
+ 32, corruption vines       , 0, 122,  97, 143, 255
+ 33, candle                 , 1, 253,  62,   3, 255
+ 34, copper chandelier      , 1, 253,  62,   3, 255
+ 35, silver chandelier      , 1, 253,  62,   3, 255
+ 36, gold chandelier        , 1, 253,  62,   3, 255
+ 37, meteorite              , 0, 223, 159, 137, 255
+ 38, gray brick             , 0, 144, 144, 144, 255
+ 39, red brick              , 0, 178,   0, 255, 255
+ 40, clay block             , 0, 172,  91,  77, 255
+ 41, blue brick             , 0,  84,  84, 152, 255
+ 42, chain lantern          , 1, 239, 144,  75, 255
+ 43, green brick            , 0,  57, 168,  81, 255
+ 44, pink brick             , 0, 178,   0, 255, 255
+ 45, gold brick             , 0, 255, 213,  20, 255
+ 46, silver brick           , 0, 229, 229, 229, 255
+ 47, copper brick           , 0, 255,  89,   0, 255
+ 48, spike                  , 0, 109, 109, 109, 255
+ 49, water candle           , 0,  43, 143, 255, 255
+ 50, book                   , 1,   0, 255, 242, 255
+ 51, cobweb                 , 0, 255, 255, 255, 255
+ 52, vines                  , 0,  13, 101,  36, 255
+ 53, sand block             , 0, 255, 218,  56, 255
+ 54, glass                  , 0, 255, 255, 255,  64
+ 55, sign                   , 1, 255, 174,  94, 255
+ 56, obsidian               , 0,  87,  81, 173, 255
+ 57, ash block              , 0,  68,  68,  76, 255
+ 58, hellstone              , 0, 102,  34,  34, 255
+ 59, mud block              , 0,  92,  68,  73, 255
+ 60, jungle grass           , 0, 143, 215,  29, 255
+ 61, jungle plants          , 1, 143, 215,  29, 255
+ 62, jungle vines           , 0, 138, 206,  28, 255
+ 63, gem sapphire           , 0,  42, 130, 250, 255
+ 64, gem ruby               , 0,  42, 130, 250, 255
+ 65, gem emerald            , 0,  42, 130, 250, 255
+ 66, gem topaz              , 0,  42, 130, 250, 255
+ 67, gem amethyst           , 0,  42, 130, 250, 255
+ 68, gem diamond            , 0,  42, 130, 250, 255
+ 69, jungle thorns          , 0,  94,  48,  55, 255
+ 70, mushroom grass         , 0,  93, 127, 255, 255
+ 71, mushroom plant         , 1, 177, 174, 131, 255
+ 72, mushroom tree          , 1, 150, 143, 110, 255
+ 73, tall grass             , 1,  13, 101,  36, 255
+ 74, tall jungle grass      , 1,  13, 101,  36, 255
+ 75, obsidian brick         , 0, 178,   0, 255, 255
+ 76, hellstone brick        , 0, 198,   0,  29, 255
+ 77, hellforge              , 1, 213,   0,  16, 255
+ 78, clay pot               , 1,   0, 255, 242, 255
+ 79, bed                    , 1,   0, 255, 242, 255
+ 80, cactus                 , 0,   0, 165,   0, 255
+ 81, coral                  , 1, 229,  83,  64, 255
+ 82, herb sprout            , 1, 255, 120,   0, 255
+ 83, herb mature            , 1, 255, 120,   0, 255
+ 84, herb bloom             , 1, 255, 120,   0, 255
+ 85, tombstone              , 1, 192, 192, 192, 255
+ 86, loom                   , 1, 255,   0, 255, 255
+ 87, piano                  , 1,   0, 255, 242, 255
+ 88, dresser                , 1,   0, 255, 242, 255
+ 89, bench                  , 1,   0, 255, 242, 255
+ 90, bathtub                , 1,   0, 255, 242, 255
+ 91, red banner             , 1,   0, 255, 242, 255
+ 92, lamp post              , 1,   0, 255, 242, 255
+ 93, tiki torch             , 1,   0, 255, 242, 255
+ 94, keg                    , 1,   0, 255, 242, 255
+ 95, chinese lantern        , 1,   0, 255, 242, 255
+ 96, cooking pot            , 1,   0, 255, 242, 255
+ 97, safe                   , 1, 255,   0, 255, 255
+ 98, skull lantern          , 1, 255,   0, 255, 255
+ 99, trash can              , 1, 255,   0, 208, 255
+100, candelabra             , 1, 255,   0, 255, 255
+101, bookcase               , 1, 255,   0, 255, 255
+102, throne                 , 1, 255,   0, 255, 255
+103, bowl                   , 1, 255,   0, 255, 255
+104, grandfather clock      , 1, 255,   0, 255, 255
+105, statue                 , 1,   0, 255, 242, 255
+106, sawmill                , 1,   0, 255, 242, 255
+107, cobalt ore             , 0,  11,  80, 143, 255
+108, mythril ore            , 0,  91, 169, 169, 255
+109, hallowed               , 0,  78, 193, 227, 255
+110, hallowed plants        , 1,  30, 150,  72, 255
+111, adamantite ore         , 0, 128,  26,  52, 255
+112, ebonsand block         , 0, 103,  98, 122, 255
+113, hallowed tall plants   , 1,  30, 150,  72, 255
+114, tinkerer's workshop    , 1, 127,  92,  69, 255
+115, vines                  , 0,  50, 127, 161, 255
+116, pearlsand block        , 0, 213, 196, 197, 255
+117, pearlstone block       , 0, 181, 172, 190, 255
+118, pearlstone brick       , 0, 213, 196, 197, 255
+119, iridescent brick       , 0,  63,  63,  73, 255
+120, mudstone block         , 0, 150, 122, 125, 255
+121, cobalt brick           , 0,  37, 118, 171, 255
+122, mythril brick          , 0, 145, 191, 117, 255
+123, silt block             , 0,  89,  83,  83, 255
+124, wooden beam            , 0,  92,  68,  54, 255
+125, crystal ball           , 1, 129, 165, 255, 255
+126, disco ball             , 1, 219, 219, 219, 255
+127, ice                    , 0, 104, 179, 200, 255
+128, mannequin              , 1, 144, 104,  80, 255
+129, crystal shard          , 1,   0,  73, 121, 255
+130, active stone block     , 0, 165, 165, 165, 255
+131, inactive stone block   , 0,  26,  26,  26, 255
+132, lever                  , 1, 201,   3,   3, 255
+133, adamantite forge       , 1, 137,  16,  18, 255
+134, mythril anvil          , 1, 150, 174, 135, 255
+135, pressure plate         , 1, 253, 114, 114, 255
+136, switch                 , 1, 204, 192, 192, 255
+137, dart trap              , 1, 140, 140, 140, 255
+138, boulder                , 1,  99,  99,  99, 255
+139, music box              , 1, 153,  99,  67, 255
+140, demonite brick         , 0, 120, 117, 179, 255
+141, explosives             , 1, 173,  35,  35, 255
+142, inlet pump             , 1, 201,   3,   3, 255
+143, outlet pump            , 1, 201,   3,   3, 255
+144, timer                  , 1, 201,   3,   3, 255
+145, candy cane block       , 0, 255,   0,   0, 255
+146, green candy cane block , 0,   0, 255,   0, 255
+147, snow block             , 0, 238, 238, 255, 255
+148, snow brick             , 0, 204, 204, 238, 255
+149, blue light             , 1, 255,   0,   0, 255
