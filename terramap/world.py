@@ -37,7 +37,7 @@ class World:
         for y in range(self.header['height']):
             self._display_progress(y + 1, self.header['height'])
             for x in range(self.header['width']):
-                colour = (0, 0, 0) if 'type' in self.tiles[(x, y)] else (255, 255, 255)
+                colour = (0, 0, 0) if 'type' in self.tiles[x * height + y] else (255, 255, 255)
                 img[x, y] = colour
                 
         print 'saving image...'
@@ -89,14 +89,14 @@ class World:
         
     def _read_tiles(self, width, height):
         print 'reading {0}x{1} tiles...'.format(width, height)
-        tiles = {}
+        tiles = []
         runlength = 0
         for x in range(width):
             self._display_progress(x + 1, width)
             for y in range(height):
                 if runlength > 0:
                     # copy the previous tile this many times
-                    tiles[x, y] = tile
+                    tiles.append(tile)
                     runlength -= 1
                     
                 else:
@@ -115,7 +115,7 @@ class World:
                     if self._read_data('bool'): # has wire?
                         tile['wire'] = True
 
-                    tiles[x, y] = tile
+                    tiles.append(tile)
                     runlength = self._read_data('word')
                     
         return tiles
