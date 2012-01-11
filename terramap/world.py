@@ -6,6 +6,7 @@ from PIL import Image
 
 class World:
     def __init__(self, worldpath, datapath):
+        print 'loading world at', worldpath
         # load tile types
         self.tiletypes = []
         with open(os.path.join(datapath, 'tiles.csv'), 'rb') as tiles:
@@ -53,24 +54,57 @@ class World:
     def draw_map(self, imgpath):
         print 'generating image...'
         width, height = self.header['width'], self.header['height']
-        image = Image.new('RGBA', (width, height))
+        image = Image.new('RGB', (width, height))
         img = image.load()
         imagedata = []
         for y in range(height):
             self._display_progress(y + 1, height)
             for x in range(width):
                 tile = self.tiles[x * height + y]
-                if 'type' in tile:
-                    colour = self.tiletypes[tile['type']]['colour']
+                
+                # draw background
+                if y < self.header['groundlevel']:
+                    colour = self.colours['sky'][:3]
+                elif y < self.header['rocklevel'] + 37: # not sure why this number is off by 37
+                    colour = self.colours['earth'][:3]
+                elif y < height - 200: # another magic number i'd prefer to do without
+                    colour = self.colours['rock'][:3]
                 else:
-                    colour = (0, 0, 0, 255)
+                    colour = self.colours['hell'][:3]
+                
+                # draw wall
+                if 'walltype' in tile:
+                    colour = self.walltypes[tile['walltype']]['colour'][:3]
+                    # this line would be used if there were any walls with alpha values
+                    #colour = self._combine_alpha(self.walltypes[tile['walltype']]['colour'], colour)
+                
+                # draw tile
+                if 'type' in tile:
+                    colour = self._combine_alpha(self.tiletypes[tile['type']]['colour'], colour)
+                
+                # draw liquid
+                if 'liquidlevel' in tile:
+                    lcolour = self.colours['lava'] if tile['lava'] else self.colours['water']
+                    colour = self._combine_alpha(lcolour, colour, tile['liquidlevel'])
+                
                 img[x, y] = colour
                 
         print 'saving image...'
         image.save(imgpath)
         print 'done.'
 
+        
+    def _combine_alpha(self, (fr, fg, fb, fa), (br, bg, bb), a=255):
+        if fa == 255 and a == 255:
+            return (fr, fg, fb)
+        a /= 255.0 * fa / 255.0
+        return (
+            int(fr * a + br * (1 - a)),
+            int(fg * a + bg * (1 - a)),
+            int(fb * a + bb * (1 - a))
+            )
 
+            
     def _read_header(self):
         header = {}
         for key, type in [
