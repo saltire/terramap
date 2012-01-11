@@ -4,4 +4,4 @@ from terramap import world
 
 
 worldpath = sys.argv[1]
-world.World(worldpath, 'tiles.csv').draw_map('map.png')
+world.World(worldpath, 'data').draw_map('map.png')

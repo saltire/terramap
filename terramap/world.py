@@ -1,23 +1,38 @@
+import os
 import struct
 import sys
 
 from PIL import Image
 
 class World:
-    def __init__(self, worldpath, tilelist):
-        # load tile properties
+    def __init__(self, worldpath, datapath):
+        # load tile types
         self.tiletypes = []
-        with open(tilelist, 'rb') as tiles:
+        with open(os.path.join(datapath, 'tiles.csv'), 'rb') as tiles:
             for line in tiles.readlines():
                 id, name, frames, r, g, b, a = [l.strip() for l in line.split(', ')]
                 self.tiletypes.append({
                     'name': name,
                     'frames': frames == '1',
-                    'r': int(r),
-                    'g': int(g),
-                    'b': int(b),
-                    'a': int(a)
+                    'colour': (int(r), int(g), int(b), int(a))
                     })
+                    
+        # load wall types
+        self.walltypes = []
+        with open(os.path.join(datapath, 'walls.csv'), 'rb') as walls:
+            for line in walls.readlines():
+                id, name, r, g, b, a = [l.strip() for l in line.split(', ')]
+                self.walltypes.append({
+                    'name': name,
+                    'colour': (int(r), int(g), int(b), int(a))
+                    })
+                    
+        # load other colours
+        self.colours = {}
+        with open(os.path.join(datapath, 'colours.csv'), 'rb') as colours:
+            for line in colours.readlines():
+                name, r, g, b, a = [l.strip() for l in line.split(', ')]
+                self.colours[name] = (int(r), int(g), int(b), int(a))
 
         # compatible map version
         version = 37 # 1.1.1
@@ -37,25 +52,25 @@ class World:
             
     def draw_map(self, imgpath):
         print 'generating image...'
-        image = Image.new('RGB', (self.header['width'], self.header['height']))
+        width, height = self.header['width'], self.header['height']
+        image = Image.new('RGBA', (width, height))
         img = image.load()
         imagedata = []
-        for y in range(self.header['height']):
-            self._display_progress(y + 1, self.header['height'])
-            for x in range(self.header['width']):
-                tile = self.tiles[x * self.header['height'] + y]
+        for y in range(height):
+            self._display_progress(y + 1, height)
+            for x in range(width):
+                tile = self.tiles[x * height + y]
                 if 'type' in tile:
-                    type = self.tiletypes[tile['type']]
-                    colour = type['r'], type['g'], type['b']
+                    colour = self.tiletypes[tile['type']]['colour']
                 else:
-                    colour = (0, 0, 0)
+                    colour = (0, 0, 0, 255)
                 img[x, y] = colour
                 
         print 'saving image...'
         image.save(imgpath)
         print 'done.'
-            
-            
+
+
     def _read_header(self):
         header = {}
         for key, type in [
