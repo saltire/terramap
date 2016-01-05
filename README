@@ -1,8 +1,9 @@
 This is a simple map generator for Terraria. It works with version 1.1.1.
 
-It uses PIL to draw a black and white representation of a Terraria world.
-Colours aren't supported yet.
+It uses PIL to draw a colour representation of a Terraria world.
 
-Instantiate the world object, passing it the paths to the world file and the
-tiles.csv file, respectively. Then call draw_map(), passing it the path to the
+Instantiate a `World` object, passing it the path to the world file and the
+data folder, respectively. Then call `draw_map()`, passing it the path to the
 output file.
+
+For an example, run `start.py`.
